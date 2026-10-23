@@ -99,11 +99,11 @@ in the Contact Science admin portal. MSPbots' own integration convention
 sends this token as the raw value of the `authorization` header — **no
 `Bearer ` prefix** — and this server forwards it exactly that way.
 
-### HEADER 授权参数说明
+### HEADER authentication parameters
 
-| Header | 类型 | 是否必填 | 默认值 | 枚举值 | 字段描述 | Example |
+| Header | Type | Required | Default | Allowed values | Description | Example |
 |---|---|---|---|---|---|---|
-| `X-ContactScience-Authorization` | string | 是 | 无 | 无 | Contact Science 静态 API Token，原样转发为上游 `authorization` 请求头（不加 `Bearer ` 前缀） | `a1b2c3d4e5f6...` |
+| `X-ContactScience-Authorization` | string | Yes | None | None | Contact Science static API Token, forwarded unchanged as the upstream `authorization` request header (without the `Bearer ` prefix) | `a1b2c3d4e5f6...` |
 
 Missing the header returns `401`:
 ```json
@@ -138,11 +138,11 @@ protocol-level exceptions), so a calling agent can branch on `code` and
 
 ## Environment Variables
 
-| Variable | 类型 | 是否必填 | 默认值 | 说明 |
+| Variable | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `MCP_HTTP_PORT` | int | 否 | `8080` | HTTP 监听端口 |
-| `MCP_HTTP_HOST` | string | 否 | `0.0.0.0` | HTTP 监听地址 |
-| `CONTACTSCIENCE_BASE_URL` | string | 否 | `https://www.klpzmedia.com/apis/1.0` | Contact Science API 基础 URL |
+| `MCP_HTTP_PORT` | int | No | `8080` | HTTP listen port |
+| `MCP_HTTP_HOST` | string | No | `0.0.0.0` | HTTP listen address |
+| `CONTACTSCIENCE_BASE_URL` | string | No | `https://www.klpzmedia.com/apis/1.0` | Contact Science API base URL |
 
 ## MCP Endpoint
 
@@ -161,12 +161,12 @@ an optional `extra_params` pass-through dict for any further query-string
 filters, since Contact Science does not publish a public API reference (see
 **Known Gaps**).
 
-| Tool | 功能 | 参数 |
+| Tool | Description | Parameters |
 |---|---|---|
-| `contactscience_get_appointments` | 列出预约（appointment）报表记录 | `start_date: str`（必填，YYYY-MM-DD）, `end_date: str \| None`（可选）, `extra_params: dict[str,str] \| None` |
-| `contactscience_get_call_block` | 列出通话拦截（call block）报表记录 | `start_date: str`（必填，YYYY-MM-DD）, `end_date: str \| None`（可选）, `extra_params: dict[str,str] \| None` |
+| `contactscience_get_appointments` | List appointment report records | `start_date: str` (required, YYYY-MM-DD), `end_date: str \| None` (optional), `extra_params: dict[str,str] \| None` |
+| `contactscience_get_call_block` | List call block report records | `start_date: str` (required, YYYY-MM-DD), `end_date: str \| None` (optional), `extra_params: dict[str,str] \| None` |
 
-## 测试示例
+## Test Example
 
 ```bash
 # Health check
